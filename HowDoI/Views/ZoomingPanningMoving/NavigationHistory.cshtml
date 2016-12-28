@@ -1,0 +1,27 @@
+﻿@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.MvcEdition
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Navigate the map and click the buttons below to revert extent or toggle
+            extent.
+            <br />
+            <br />
+            <input id="btnPre" style="width:180px;" type="button" value="To Previous Extent" onclick="Map1.zoomToPreviousExtent();" />
+            <input id="btnNext" style="width:180px;" type="button" value="To Next Extent" onclick="Map1.zoomToNextExtent();" /><br />
+            <input id="btnToggle" style="width:180px;" type="button" value="Toggle Extent" onclick="Map1.toggleExtent();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+              .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+              .MapUnit(GeographyUnit.DecimalDegree)
+              .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+              .CustomOverlays(overlay => overlay.WorldMapKitWmsWebOverlay())
+              .Render();
+        }
+    </div>
+</div>

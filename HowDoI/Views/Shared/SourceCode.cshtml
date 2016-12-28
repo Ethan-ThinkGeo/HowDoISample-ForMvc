@@ -1,0 +1,24 @@
+﻿@{
+    string uri = this.Context.Request.Url.PathAndQuery;
+    string[] uriParts = uri.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+    string controllerName = uriParts[0];
+    string actionName = uriParts[1];
+}
+<div id="sourcebuttons-above">
+    <h4>
+        Source Code</h4>
+    <div class="sourcebuttons">
+        <a onclick="javascript:invokeAction('GetSourceCode', 'Controller', 'category=@controllerName&pageName=@actionName', sourceodeCallback)" class="button blue" target="_blank">
+            View Controller Source</a>
+    </div>
+    <div class="sourcebuttons">
+        <a onclick="javascript:invokeAction('GetSourceCode', 'Razor', 'category=@controllerName&pageName=@actionName', sourceodeCallback)" class="button blue" target="_blank">
+            View Aspx/Razor Source</a>
+    </div>
+</div>
+<div id="instrux-showhide">
+    <input type="button" id="showhide-button" value="-" style="width: 18px; height: 18px;"
+        onclick="toggleInstrux()" />
+</div>
+<h4>
+    Instructions</h4>

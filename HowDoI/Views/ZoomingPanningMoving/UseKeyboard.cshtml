@@ -1,0 +1,74 @@
+﻿@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.MvcEdition
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Try the keys in the table below to operate the map.
+            <br />
+            <br />
+            <table cellpadding="2" cellspacing="2" border="1" width="220" style="border:1px solid #ccc;">
+                <tr>
+                    <td style="border:1px solid #ccc;">Left Arrow</td>
+                    <td style="border:1px solid #ccc;">Pan left with the offset specified by PanPixels</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Left Arrow</td>
+                    <td style="border:1px solid #ccc;">Pan left with the offset specified by PanPixels</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Right Arrow</td>
+                    <td style="border:1px solid #ccc;">Pan right with the offset specified by PanPixels</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Up Arrow</td>
+                    <td style="border:1px solid #ccc;">Pan up with the offset specified by PanPixels</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Down Arrow</td>
+                    <td style="border:1px solid #ccc;">Pan down with the offset specified by PanPixels</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Page Up</td>
+                    <td style="border:1px solid #ccc;">Pan up with 0.75*Map.Height offset</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Page Down</td>
+                    <td style="border:1px solid #ccc;">Pan down with 0.75*Map.Height offset</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">Home</td>
+                    <td style="border:1px solid #ccc;">Pan left with 0.75*Map.Width offset</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">End</td>
+                    <td style="border:1px solid #ccc;">Pan right with 0.75*Map.Width offset</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">+</td>
+                    <td>Zoom In</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ccc;">-</td>
+                    <td>zoom out</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+              .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+              .MapUnit(GeographyUnit.DecimalDegree)
+              .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+              .CustomOverlays(overlay => overlay.WorldMapKitWmsWebOverlay())
+              .MapTools(tools =>
+              {
+                  tools.MouseMapTool().Enabled(false);
+                  tools.KeyboardMapTool().Enabled(true);
+              })
+              .Render();
+        }
+    </div>
+</div>

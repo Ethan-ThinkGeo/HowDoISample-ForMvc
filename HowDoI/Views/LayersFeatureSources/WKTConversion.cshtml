@@ -1,0 +1,59 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+<script language="javascript" type="text/javascript">
+    function btnConvert_Click() {
+        var btnConvertText = document.getElementById("btnConvert").value;
+        var wkt = document.getElementById("txtWKT").innerHTML;
+
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'ConvertWkt', { 'btnConvertText': btnConvertText, 'wkt': wkt }, mapCallback);
+
+        if (btnConvertText == "WKT  to  Feature") {
+            btnConvertText = "Feature  to  WKT";
+        }
+        else {
+            btnConvertText = "WKT  to  Feature";
+        }
+        document.getElementById("btnConvert").value = btnConvertText;
+    }
+
+    function mapCallback(result) {
+        Map1.redrawLayer("StaticOverlay");
+        document.getElementById("txtWKT").innerHTML = result.get_responseData();
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on the button to convert the shape to and from well known binary.
+            <br />
+            <br />
+            @Html.TextArea("txtWKT", "POLYGON((-111 34,-111 46,-89 46,-89 34,-111 34))", new { TextMode = "MultiLine", Rows = "5", Width = "96%", ReadOnly = "True" })
+            <br />
+            <br />
+            <input type="button" id="btnConvert" value="WKT  to  Feature" style="width: 96%;"
+                onclick="btnConvert_Click();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays => overlays.WorldMapKitWmsWebOverlay())
+                .CustomOverlays(overlays =>
+                {
+                    InMemoryFeatureLayer mapShapeLayer = new InMemoryFeatureLayer();
+                    mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(122, 145, 255, 144);
+                    mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.GeographicColors.DeepOcean;
+                    mapShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                    overlays.LayerOverlay("StaticOverlay").IsBaseOverlay(false).TileType(TileType.SingleTile).Layer("InMemoryFeatureLayer", mapShapeLayer);
+                })
+                .Render();
+        }
+    </div>
+</div>

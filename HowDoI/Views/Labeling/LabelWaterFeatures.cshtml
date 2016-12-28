@@ -1,0 +1,31 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            We have drawn and label a lake layer with a predefined style.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromArgb(255, 233, 232, 214))))
+                .CurrentExtent(-112.8, 41.7, -111.6, 40.7)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .StaticOverlay(overlay =>
+                {
+                    ShapeFileFeatureLayer utahWaterShapeLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/UtahWater.shp"));
+                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Water1;
+                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Water1("Landname");
+                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                    utahWaterShapeLayer.DrawingMarginPercentage = 50;
+
+                    overlay.Layer(utahWaterShapeLayer);
+                })
+                .Render();
+        }
+    </div>
+</div>

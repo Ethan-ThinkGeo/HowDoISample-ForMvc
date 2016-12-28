@@ -1,0 +1,17 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@model ThinkGeo.MapSuite.MvcEdition.Map 
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            This sample simply uses ThinkGeo default world map kit service overlay.<br />
+        </div>
+    </div>
+</div>
+<!-- /navigation -->
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{Html.ThinkGeo().Map(Model).Render();}
+    </div>
+</div>

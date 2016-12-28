@@ -1,0 +1,39 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            We have drawn and labeled these roads using a pleasing style.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510).MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromArgb(255, 233, 232, 214))))
+                .CurrentExtent(-97.766, 30.291, -97.755, 30.286)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .StaticOverlay(overlay =>
+                {
+                    ShapeFileFeatureLayer austinStreetsShapeLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\austinstreets.shp"));
+                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.LocalRoad1;
+                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                    
+                    overlay.Layer(austinStreetsShapeLayer);
+                    overlay.TileType(TileType.MultipleTile);
+                })
+                .DynamicOverlay(overlay =>
+                {
+                    ShapeFileFeatureLayer austinStreetsLabelLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\austinstreets.shp"));
+                    austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.LocalRoad1("FENAME");
+                    austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                    austinStreetsLabelLayer.DrawingMarginPercentage = 100;
+
+                    overlay.TileType(TileType.SingleTile);
+                    overlay.Layer(austinStreetsLabelLayer);
+                })
+                .Render();
+        }
+    </div>
+</div>

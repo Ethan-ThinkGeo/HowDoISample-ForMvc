@@ -1,0 +1,30 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+@model ThinkGeo.MapSuite.MvcEdition.Map 
+<script language="javascript" type="text/javascript">
+    function mapClick(e) {
+        var params = { x: e.worldXY.lon, y: e.worldXY.lat };
+
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'ClickEvent', params, mapCallback);
+    }
+
+    function mapCallback(result) {
+        Map1.redrawLayer('MarkerOverlay');
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on the map to add a marker.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map(Model)
+                .OnClientClick("mapClick").Render();
+        }
+    </div>
+</div>

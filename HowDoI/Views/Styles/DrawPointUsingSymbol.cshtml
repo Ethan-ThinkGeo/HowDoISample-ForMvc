@@ -1,0 +1,34 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            <p>
+                The cities on the screen were rendered using a symbol.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                ShapeFileFeatureLayer citiesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cities_a.shp"));
+                citiesLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Star, new GeoSolidBrush(GeoColor.StandardColors.Green), new GeoPen(GeoColor.StandardColors.Red, 5), 20);
+                citiesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                citiesLayer.DrawingMarginPercentage = 100;
+
+                overlays.LayerOverlay().Layer("CitiesLayer", citiesLayer).IsBaseOverlay(false);
+
+            })
+            .Render();
+    }
+</div>

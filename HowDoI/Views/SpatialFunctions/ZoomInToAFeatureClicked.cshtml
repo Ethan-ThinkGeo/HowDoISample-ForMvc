@@ -1,0 +1,52 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function zoomToFeature(e) {
+        var param = { x: e.worldXY.lon, y: e.worldXY.lat };
+
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'ZoomToShape', param, callback);
+    }
+
+    function callback(result) {
+        var parameters = result.get_responseData().split("|");
+        var extent = parameters[0].split(",");
+        var bbox = new OpenLayers.Bounds(extent[0], extent[1], extent[2], extent[3]);
+        Map1.zoomToExtent(bbox);
+        document.getElementById("dataInfoDiv").innerHTML = parameters[1];
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on a country to zoom to it.
+            <div id="dataInfoDiv"></div>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit("100%"), 510)
+        .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+        .CurrentExtent(-125, 72, 50, -46)
+        .MapUnit(GeographyUnit.DecimalDegree)
+        .CustomOverlays(overlays =>
+        {
+            overlays.WorldMapKitWmsWebOverlay("World Map");
+
+            ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+            worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+            worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            overlays.LayerOverlay("CountryOverlay").IsBaseOverlay(false).Layer("WorldLayer", worldLayer);
+
+            InMemoryFeatureLayer highlightLayer = new InMemoryFeatureLayer();
+            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(100, 60, 180, 60), GeoColor.GeographicColors.DeepOcean);
+            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Country1("CNTRY_NAME");
+            highlightLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            overlays.LayerOverlay("HighlightOverlay").IsBaseOverlay(false).TileType(TileType.SingleTile).Layer("HighlighLayer", highlightLayer);
+        })
+        .OnClientClick("zoomToFeature")
+        .Render();
+    }
+</div>

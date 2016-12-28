@@ -1,0 +1,39 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@using System.Collections.ObjectModel;
+@using ZedGraph;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            <p>
+                This sample uses different density of dots to represent different population of
+                states.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays =>
+                {
+                    overlays.WorldMapKitWmsWebOverlay();
+                    ShapeFileFeatureLayer statesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/states.shp"));
+                    statesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                    DotDensityStyle dotDensityStyle = new DotDensityStyle();
+                    dotDensityStyle.ColumnName = "POP1990";
+                    dotDensityStyle.PointToValueRatio = 0.00001;
+                    dotDensityStyle.CustomPointStyle = new PointStyle(PointSymbolType.Circle, new GeoSolidBrush(GeoColor.FromArgb(180, GeoColor.StandardColors.OrangeRed)), 4);
+                    statesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(dotDensityStyle);
+                    overlays.LayerOverlay().IsBaseOverlay(false).Layer("States", statesLayer);
+                })
+                .Render();
+        }
+    </div>
+</div>

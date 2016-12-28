@@ -1,0 +1,41 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@using System.Configuration;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Move your mouse over one of the states to highlight it.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays =>
+                {
+                    overlays.WorldMapKitWmsWebOverlay();
+                })
+                .HighlightOverlay(hl =>
+                {
+                    FeatureLayer statesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/states.shp"));
+                    statesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+                    statesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                    statesLayer.Open();
+                    hl.HighlightStyle(new FeatureOverlayStyle(GeoColor.FromArgb(120, GeoColor.StandardColors.OrangeRed), GeoColor.StandardColors.Red, 1));
+
+                    foreach (Feature feature in statesLayer.FeatureSource.GetAllFeatures(ReturningColumnsType.NoColumns))
+                    {
+                        hl.Feature(feature.Id, feature);
+                    }
+                    statesLayer.Close();
+                })
+                .Render();
+        }
+    </div>
+</div>

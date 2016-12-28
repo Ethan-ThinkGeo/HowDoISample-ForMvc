@@ -1,0 +1,27 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@model ThinkGeo.MapSuite.MvcEdition.Map 
+<script language="javascript" type="text/javascript">
+    function mapClick(e) {
+        var infoPopup = Map1.popups[0];
+        infoPopup.lonlat = e.worldXY;
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'FindFeatureClick', { x: e.worldXY.lon, y: e.worldXY.lat }, function (result) {
+            Map1.redrawLayer("HightLightDynamicOverlay");
+            infoPopup.setContentHTML(result.get_responseData());
+            infoPopup.show();
+        })
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on a country to show its information.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{Html.ThinkGeo().Map(Model).OnClientClick("mapClick").Render();}
+    </div>
+</div>

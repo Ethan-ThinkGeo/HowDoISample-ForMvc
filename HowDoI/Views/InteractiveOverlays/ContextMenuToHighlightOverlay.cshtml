@@ -1,0 +1,51 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@using System.Configuration;
+<script type="text/javascript">
+    function onClientClick(e) {
+        var infoPopup = Map1.popups[0];
+        infoPopup.lonlat = e.worldXY;
+        var contentHtml = "<span class='popup'>Clicked Location<br/>(" + e.worldXY.lon + ", " + e.worldXY.lat + ")</span>";
+        infoPopup.setContentHTML(contentHtml);
+        infoPopup.show();
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Right click on the rectangle to see a context menu.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays =>
+                {
+                    overlays.WorldMapKitWmsWebOverlay();
+                })
+                .HighlightOverlay(hl =>
+                {
+                    ContextMenu menuOnEventLayer = new ContextMenu("area", 200);
+
+                    ContextMenuItem menu1 = new ContextMenuItem("<a href='http://thinkgeo.com/About/tabid/524/Default.aspx' target='_blank'>About ThinkGeo<a>");
+                    ContextMenuItem menu2 = new ContextMenuItem("click me");
+                    menu2.OnClientClick = "onClientClick";
+
+                    menuOnEventLayer.MenuItems.Add(menu1);
+                    menuOnEventLayer.MenuItems.Add(menu2);
+
+                    hl.HighlightStyle(new FeatureOverlayStyle(GeoColor.FromArgb(120, GeoColor.StandardColors.OrangeRed), GeoColor.StandardColors.Red, 1))
+                        .Feature("multipolygon", new Feature(new RectangleShape(-110.22, 50, -80.03, 30)))
+                        .ContextMenu(menuOnEventLayer);
+                })
+                .Popups(p => p.CloudPopup("DefaultPopup").AutoSize(true).IsVisible(false))
+                .Render();
+        }
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function btnGetShortestLine_Click() {
+        Map1.ajaxCallAction("InteractiveOverlays", "ShortestLineFeature", null, callback);
+    }
+    function callback(result) {
+        Map1.redrawLayer("OverLayer");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the button to show a line representing the shortest distance between the two
+            features.
+            <br />
+            <input type="button" id="btnGetShortestLine" name="btnGetShortestLine" value="Get the shortest line"
+                onclick="btnGetShortestLine_Click();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+@{
+    Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+        .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+        .CurrentExtent(-125, 72, 50, -46)
+        .MapUnit(GeographyUnit.DecimalDegree)
+        .CustomOverlays(overlays =>
+        {
+            overlays.WorldMapKitWmsWebOverlay();
+
+            InMemoryFeatureLayer mapShapeLayer = new InMemoryFeatureLayer();
+            mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(125, 141, 255, 141);
+            mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.GeographicColors.DeepOcean;
+            mapShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+            mapShapeLayer.InternalFeatures.Add("AreaShape1", new Feature(BaseShape.CreateShapeFromWellKnownData("POLYGON((-10 40,40 70,50 0,-10 40))")));
+            mapShapeLayer.InternalFeatures.Add("AreaShape2", new Feature(new EllipseShape(new PointShape(-70, -20), 10, 20)));
+
+            InMemoryFeatureLayer shortestLineLayer = new InMemoryFeatureLayer();
+            shortestLineLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.Red, 2, false);
+            shortestLineLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+            overlays.LayerOverlay("OverLayer").TileType(TileType.SingleTile).IsBaseOverlay(false).Layer("InMemoryFeatureLayer", mapShapeLayer)
+                .Layer("ShortestLineLayer", shortestLineLayer);
+
+        })
+        .Render();
+}
+</div> 

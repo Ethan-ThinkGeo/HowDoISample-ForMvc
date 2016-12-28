@@ -1,0 +1,46 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function mapClick(e) {
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'ClickOnFeature', { x: e.worldXY.lon, y: e.worldXY.lat }, mapCallback);
+    }
+
+    function mapCallback(result) {
+        Map1.redrawLayer("BoundingBoxOverlay");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on a country to draw its envelope.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-125, 72, 50, -46)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+                worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+                worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                // Setup the BoundingBox InMemoryFeatureLayer.
+                InMemoryFeatureLayer boundingBoxLayer = new InMemoryFeatureLayer();
+                boundingBoxLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(100, 200, 255, 200);
+                boundingBoxLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.GeographicColors.DeepOcean;
+                boundingBoxLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                overlays.LayerOverlay().Layer("WorldLayer", worldLayer).IsBaseOverlay(false);
+                overlays.LayerOverlay("BoundingBoxOverlay").Layer("BoundingBoxLayer", boundingBoxLayer).TileType(TileType.SingleTile).IsBaseOverlay(false);
+            })
+            .OnClientClick("mapClick")
+            .Render();
+    }
+</div>

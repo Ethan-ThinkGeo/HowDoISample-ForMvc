@@ -1,0 +1,59 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@using System.Configuration
+<script language="javascript" type="text/javascript">
+    function showTextCheckBox_CheckedChanged(checkBoxObj) {
+        if (checkBoxObj.checked) {
+            Map1.ajaxCallAction("InteractiveOverlays", "ShowTextCheckBox", { objValue: 'checked' }, callback);
+        }
+        else {
+            Map1.ajaxCallAction("InteractiveOverlays", "ShowTextCheckBox", { objValue: 'unChecked' }, callback);
+        }
+    }
+
+    function callback(result) {
+        Map1.redrawLayer("MarkerOverlay");
+    }
+
+    function rotateButton_Click() {
+        Map1.ajaxCallAction("InteractiveOverlays", "ShowRotation", null, callback);
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the checkbox to show a custom drawn arrow on the marker then click the button
+            to rotate it.
+            <br />
+            <br />
+            <input type="checkbox" id="showTextCheckBox" name="showTextCheckBox" onchange="showTextCheckBox_CheckedChanged(this);" />Show
+            text on the marker
+            <br />
+            <br />
+            <input type="button" id="rotateButton" value="Rotate the Marker" onclick="rotateButton_Click()" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-131.22, 55.05, -54.03, 16.91).MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays =>
+                {
+                    overlays.WorldMapKitWmsWebOverlay();
+
+                    overlays.InMemoryMarkerOverlay("MarkerOverlay")
+                        .Feature("Kansas", new Feature(-94.48242, 38.75977))
+                        .ZoomLevelSet(z =>
+                        {
+                            z.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                            z.ZoomLevel01.DefaultMarkerStyle.WebImage = new ThinkGeo.MapSuite.MvcEdition.WebImage(Url.Content("~/Content/images/Vehicle.png"), 48, 48, -32, -32);
+                        });
+                })
+                .Render();
+        }
+    </div>
+</div>

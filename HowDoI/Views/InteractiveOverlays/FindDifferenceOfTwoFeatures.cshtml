@@ -1,0 +1,47 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function btnDifference_Click() {
+        Map1.ajaxCallAction("InteractiveOverlays", "DifferenceFeature", null, callback);
+    }
+    function callback(result) {
+        Map1.redrawLayer("OverLayer");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the button to show the difference of two features.<br />
+            <input type="button" id="btnDifference" name="btnDifference" value="Difference" onclick="btnDifference_Click();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-125, 72, 50, -46)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                InMemoryFeatureLayer mapShapeLayer = new InMemoryFeatureLayer();
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = new AreaStyle(new GeoSolidBrush(new GeoColor(50, 100, 100, 200)));
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.RoyalBlue;
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                BaseShape areaShape1 = new RectangleShape(-40, 40, 0, 0);
+                areaShape1.Id = "AreaShape1";
+                BaseShape areaShape2 = new RectangleShape(-20, 70, 30, 20);
+                areaShape2.Id = "AreaShape2";
+                mapShapeLayer.InternalFeatures.Add("AreaShape1", new Feature(areaShape1));
+                mapShapeLayer.InternalFeatures.Add("AreaShape2", new Feature(areaShape2));
+
+                overlays.LayerOverlay("OverLayer").TileType(TileType.SingleTile).IsBaseOverlay(false).Layer("InMemoryFeatureLayer", mapShapeLayer);
+
+            })
+            .Render();
+    }
+</div>

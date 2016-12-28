@@ -1,0 +1,18 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@model ThinkGeo.MapSuite.MvcEdition.Map
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the icon to print the current map.<br />
+            <input type="button" name="ClickButton" value="PrintMap" onclick="Map1.printMap();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @Html.ThinkGeo().Map(Model).Render()
+        <br />
+    </div>
+</div>

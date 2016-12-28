@@ -1,0 +1,44 @@
+﻿@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.MvcEdition
+<script language="javascript" type="text/javascript">
+    function callback(result) {
+        Map1.redrawLayer("InMemoryFeatureLayer");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            <p>
+                Click one of the buttons to scale the feature up or down.
+            </p>
+            <input type="button" style="width:100px;" id="btnScaleUp" name="btnScaleUp" value="Scale Up" onclick="Map1.ajaxCallAction('ZoomingPanningMoving','Scale',{dir: 'up'},callback);" />
+            &nbsp;
+            <input type="button" style="width:100px;" id="btnScaleDown" name="btnScaleDown" value="Scale Down" onclick="Map1.ajaxCallAction('ZoomingPanningMoving','Scale',{dir: 'down'},callback);" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+              .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+              .MapUnit(GeographyUnit.DecimalDegree)
+              .CurrentExtent(-125, 72, 50, -46)
+              .CustomOverlays(overlay =>
+              {
+                  overlay.WorldMapKitWmsWebOverlay();
+                  InMemoryFeatureLayer mapShapeLayer = new InMemoryFeatureLayer();
+                  mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(122, 145, 255, 144);
+                  mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.GeographicColors.DeepOcean;
+                  mapShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                  BaseShape feature = new RectangleShape(-20, 45, 20, 15);
+                  feature.Id = "Rectangle";
+                  mapShapeLayer.InternalFeatures.Add("Rectangle", new Feature(feature));
+
+                  overlay.LayerOverlay("InMemoryFeatureLayer").Layer(mapShapeLayer).IsBaseOverlay(false).TileType(TileType.SingleTile);
+              })
+              .Render();
+        }
+    </div>
+</div>

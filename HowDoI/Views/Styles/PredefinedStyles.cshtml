@@ -1,0 +1,50 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+
+<script language="javascript" type="text/javascript">
+    function ddlPreDefinedStyles_SelectedIndexChanged(selectObj) {
+        var styleOption = selectObj.value;
+        Map1.ajaxCallAction("Styles", "PreDefinedStyles_SelectedIndexChanged", { styleMode: styleOption }, callback);
+    }
+
+    function callback(result) {
+        Map1.redrawLayer("StaticOverlay");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            <p>
+                Select a predefined style from the list to use it for the countries.
+            </p>
+            <select id="ddlPreDefinedStyles" name="ddlPreDefinedStyles" size="8" onchange="ddlPreDefinedStyles_SelectedIndexChanged(this)">
+                <option value="AreaStyles.Country1">AreaStyles.Country1</option>
+                <option value="AreaStyles.Swamp1">AreaStyles.Swamp1</option>
+                <option value="AreaStyles.Grass1">AreaStyles.Grass1</option>
+                <option value="AreaStyles.Sand1">AreaStyles.Sand1</option>
+                <option value="AreaStyles.Crop1">AreaStyles.Crop1</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+                
+                ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+                worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
+                worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                overlays.LayerOverlay("StaticOverlay").Layer("WorldLayer", worldLayer).IsBaseOverlay(false);
+
+            })
+            .Render();
+    }
+</div>

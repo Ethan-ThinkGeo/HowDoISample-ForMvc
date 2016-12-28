@@ -1,0 +1,16 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@model ThinkGeo.MapSuite.MvcEdition.Map 
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            The example demonstrates how to stop certain features from drawing.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        @{Html.ThinkGeo().Map(Model).Render();}
+    </div>
+</div>

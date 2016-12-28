@@ -1,0 +1,47 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function btnBuffer_Click() {
+        Map1.ajaxCallAction("InteractiveOverlays", "BufferFeature", null, callback);
+    }
+    function callback(result) {
+        Map1.redrawLayer("BufferLayerOverLayer");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the button to draw a buffer around the feature.<br />
+            <input type="button" id="btnBuffer" name="btnBuffer" value="Buffer" onclick="btnBuffer_Click();" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                InMemoryFeatureLayer mapShapeLayer = new InMemoryFeatureLayer();
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(150, 60, 180, 60);
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.GeographicColors.DeepOcean;
+                mapShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                mapShapeLayer.InternalFeatures.Add("POLYGON", new Feature(BaseShape.CreateShapeFromWellKnownData("POLYGON((-109.51171875 34.4522184728265,-109.51171875 42.9403392336318,-90.439453125 42.9403392336318,-90.439453125 34.4522184728265,-109.51171875 34.4522184728265))")));
+
+                InMemoryFeatureLayer bufferLayer = new InMemoryFeatureLayer();
+                bufferLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.FillSolidBrush.Color = GeoColor.FromArgb(100, 200, 255, 200);
+                bufferLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.Color = GeoColor.StandardColors.LightGreen;
+                bufferLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                
+                overlays.LayerOverlay("BufferLayerOverLayer").TileType(TileType.SingleTile).IsBaseOverlay(false).Layer("InMemoryFeatureLayer", mapShapeLayer)
+                    .Layer("BufferLayer", bufferLayer);
+
+            })
+            .Render();
+    }
+</div>

@@ -1,0 +1,49 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@{
+    ViewBag.Title = "AddAContextMenu";
+}
+<script type="text/javascript">
+    function contextMenuClick(e) {
+        document.getElementById("worldX").value = e.worldXY.lon;
+        document.getElementById("worldY").value = e.worldXY.lat;
+    }
+
+    function popupInfomation() {
+        alert("Infomation popup by ContextMenu");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Right click on the map to show the context menu and select an item.
+            <br />
+            <br />
+            <span>World-X</span>&nbsp;
+            <input type="text" id="worldX" />
+            <br />
+            <span>World-Y</span>&nbsp;
+            <input type="text" id="worldY" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div id="map">
+        <div>
+            @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-125, 72, 50, -46)
+          .CustomOverlays(overlay => overlay.WorldMapKitWmsWebOverlay())
+          .ContextMenu(menu =>
+          {
+              menu.MenuItems(m => m.ContextMenuItem("<a href='http://www.thinkgeo.com' target='_blank'>ThinkGeo</a>"));
+              menu.MenuItems(m => m.ContextMenuItem("CurrentPosition(Ajax Call)")
+                                   .OnClientClick("contextMenuClick"));
+              menu.MenuItems(m => m.ContextMenuItem("<div onclick='popupInfomation();'>Infomation(Client Event)</div>"));
+          })
+          .Render();}
+        </div>
+    </div>
+</div>

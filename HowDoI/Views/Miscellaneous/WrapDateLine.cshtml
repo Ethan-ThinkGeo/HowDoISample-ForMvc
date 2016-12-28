@@ -1,0 +1,30 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            The sample shows wrapping at the date line. Wrapping the date line is an option
+            on the WmsOverlay, LayerOverlay and WorldMapKitWmsWebOverlay.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-125, 72, 50, -46)
+          .CustomOverlays(overlay =>
+              {
+                  overlay.WorldMapKitWmsWebOverlay().WrapDateline(WrapDatelineMode.WrapDateline);
+
+                  ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+                  worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                  worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+
+                  overlay.LayerOverlay().WrapDateline(WrapDatelineMode.WrapDateline).IsBaseOverlay(false).Layer(worldLayer);
+              })
+          .Render();}
+    </div>
+</div>

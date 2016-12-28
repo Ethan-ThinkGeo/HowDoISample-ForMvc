@@ -1,0 +1,68 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+<style type="text/css">
+    html
+    {
+        height: 100%;
+    }
+    .descContent
+    {
+        font-family: :Verdana;
+        font-size: 11px;
+    }
+    input
+    {
+        margin: 3px;
+    }
+</style>
+<script language="javascript" type="text/javascript">
+    function btnConvert_Click() {
+        var x = document.getElementById("ScreenXTextBox").value;
+        var y = document.getElementById("ScreenYTextBox").value;
+
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'ConvertCoordinate', { 'x': x, 'y': y }, mapCallback);
+    }
+
+    function mapCallback(result) {
+        Map1.redrawLayer("InMemoryMarkerOverlay");
+        document.getElementById("Label1").innerHTML = result.get_responseData();
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the button to add a marker where the screen coordinates in the textbox represents.
+            <br />
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        ScreenX:<input type="text" id="ScreenXTextBox" readonly="readonly" value="350" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ScreenY:<input type="text" id="ScreenYTextBox" readonly="readonly" value="350" />
+                    </td>
+                </tr>
+            </table>
+            <input type="button" id="btnConvert" style="width: 215px;" value="Convert To World Coordinate"
+                onclick="btnConvert_Click();" />
+            <br />
+            <div id="Label1">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main"> <div id="map">
+@{
+    Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+        .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+        .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+        .MapUnit(GeographyUnit.DecimalDegree)
+        .CustomOverlays(overlays => overlays.WorldMapKitWmsWebOverlay())
+        .CustomOverlays(overlays => overlays.InMemoryMarkerOverlay("InMemoryMarkerOverlay").ZoomLevelSet(m => m.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20))
+        .Render();
+}
+</div> </div> 

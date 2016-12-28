@@ -1,0 +1,37 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            This sample renders cities in different styles based on their "POP_RANK" value.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-125, 72, 50, -46)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                ShapeFileFeatureLayer citiesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/capital.shp"));
+                citiesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                // Draw features based on values
+                ValueStyle valueStyle = new ValueStyle();
+                valueStyle.ColumnName = "POP_RANK";
+                valueStyle.ValueItems.Add(new ValueItem("1", PointStyles.Capital1));
+                valueStyle.ValueItems.Add(new ValueItem("2", PointStyles.Capital3));
+                valueStyle.ValueItems.Add(new ValueItem("3", PointStyles.City7));
+                citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(valueStyle);
+                citiesLayer.DrawingMarginPercentage = 50;
+                overlays.LayerOverlay().Layer("CitiesLayer", citiesLayer).IsBaseOverlay(false);
+
+            })
+            .Render();
+    }
+</div>

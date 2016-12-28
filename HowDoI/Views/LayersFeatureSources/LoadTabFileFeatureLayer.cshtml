@@ -1,0 +1,27 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            The sample demonstrates how to render TabFeatureLayer.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.GeographicColors.ShallowOcean)))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-96.51477, 30.759543, -94.355788, 28.910652)
+          .CustomOverlays(overlays => overlays.WorldMapKitWmsWebOverlay())
+          .CustomOverlays(overlays =>
+          {
+              TabFeatureLayer worldLayer = new TabFeatureLayer(Server.MapPath("~/App_Data/HoustonMuniBdySamp_Boundary.TAB"));
+              worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(100, GeoColor.SimpleColors.Green), GeoColor.SimpleColors.Green);
+              worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+              overlays.LayerOverlay("StaticOverlay").IsBaseOverlay(false).Layer(worldLayer);
+          }).Render();}
+    </div>
+</div>

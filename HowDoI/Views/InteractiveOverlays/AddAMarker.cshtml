@@ -1,0 +1,47 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function mapCallback(result) {
+        Map1.redrawLayer("MarkerOverlay");
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            This sample demonstrates how to add a marker on the map.<br />
+            <input type="button" onclick="Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'AddMarker', { markerId: 'Marker', x: '-94.558', y: '39.078' }, mapCallback);"
+                value="Add Marker" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+          .CustomOverlays(overlay =>
+          {
+              overlay.WorldMapKitWmsWebOverlay();
+
+              overlay.InMemoryMarkerOverlay("MarkerOverlay")
+                  .ZoomLevelSet(z =>
+                  {
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.ContentHtml = "<div style='font-size:11px'>Kansas City</Div>";
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.HasCloseButton = true;
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.Width = 100;
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.Height = 30;
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.BackgroundColor = GeoColor.StandardColors.LightBlue;
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.BorderColor = GeoColor.StandardColors.Black;
+                      z.ZoomLevel01.DefaultMarkerStyle.Popup.BorderWidth = 1;
+                      z.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetX = -10.5f;
+                      z.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageOffsetY = -25f;
+                      z.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageWidth = 21;
+                      z.ZoomLevel01.DefaultMarkerStyle.WebImage.ImageHeight = 25;
+                      z.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+                  });
+          })
+          .Render();}
+    </div>
+</div>

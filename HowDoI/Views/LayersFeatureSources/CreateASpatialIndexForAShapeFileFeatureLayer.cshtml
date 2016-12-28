@@ -1,0 +1,46 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function btnSpatial_Click() {
+        Map1.ajaxCallAction('@ViewContext.RouteData.Values["Controller"].ToString()', 'Spatial', null, mapCallback);
+    }
+
+    function mapCallback(result) {
+        if (result.get_responseData()) {
+            document.getElementById("Label1").innerHTML = result.get_responseData();
+        }
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click the button below to generate spatial index file.
+            <br />
+            <br />
+            <input id="btnSpatial" type="button" value="Build Spatial Index" onclick="btnSpatial_Click();" />
+            <br />
+            <br />
+            <div id="Label1" class="warning">
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.GeographicColors.ShallowOcean)))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-125, 72, 50, -46)
+          .CustomOverlays(overlays => overlays.WorldMapKitWmsWebOverlay())
+          .CustomOverlays(overlays =>
+          {
+              ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+              worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+              worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+              overlays.LayerOverlay().IsBaseOverlay(false).Layer(worldLayer);
+          }).Render();}
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+@using System.Collections.ObjectModel;
+@using ZedGraph;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            <p>
+                We used a regular expression to draw the countries differently that have the string
+                “land” in them such as Greenland.
+            </p>
+            <label id="label1">
+                Regular Expression:</label>
+            <input type="text" id="regularExpressionTextBox" value=".*land" disabled="disabled" />
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-99, 86, 77, -31)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlays =>
+                {
+                    overlays.WorldMapKitWmsWebOverlay();
+                    ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+                    worldLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green)));
+                    worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                    // Draw features based on regular expression
+                    RegexStyle regexStyle = new RegexStyle();
+                    regexStyle.ColumnName = "CNTRY_NAME";
+                    regexStyle.RegexItems.Add(new RegexItem(".*land", new AreaStyle(new GeoSolidBrush(GeoColor.StandardColors.LightGreen))));
+                    worldLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(regexStyle);
+                    overlays.LayerOverlay().IsBaseOverlay(false).Layer("WorldLayer", worldLayer);
+                })
+                .Render();
+        }
+    </div>
+</div>

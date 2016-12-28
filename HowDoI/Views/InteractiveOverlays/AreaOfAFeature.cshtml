@@ -1,0 +1,45 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<script language="javascript" type="text/javascript">
+    function clickToGetArea(e) {
+        var infoPopup = Map1.popups[0];
+        infoPopup.lonlat = e.worldXY;
+        Map1.ajaxCallAction("InteractiveOverlays", "GetArea", { x: e.worldXY.lon, y: e.worldXY.lat }, function (result) {
+            infoPopup.setContentHTML(result.get_responseData());
+            infoPopup.show();
+        })
+    }
+</script>
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            Click on a country to show its area.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    @{
+        Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .CurrentExtent(-125, 72, 50, -46)
+            .MapUnit(GeographyUnit.DecimalDegree)
+            .CustomOverlays(overlays =>
+            {
+                overlays.WorldMapKitWmsWebOverlay();
+
+                ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
+                worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
+                worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
+
+                overlays.LayerOverlay("OverLayer").TileType(TileType.SingleTile).IsBaseOverlay(false).Layer("worldLayer", worldLayer);
+
+            })
+            .Popups(popups =>
+            {
+                popups.CloudPopup("information").AutoSize(true).IsVisible(false);
+            })
+            .OnClientClick("clickToGetArea")
+            .Render();
+    }
+</div>

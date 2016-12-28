@@ -1,0 +1,30 @@
+﻿@using ThinkGeo.MapSuite.Core;
+@using ThinkGeo.MapSuite.MvcEdition;
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            This sample uses a custom loading image when zoom in/out.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510).MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .CurrentExtent(-125, 72, 50, -46)
+                .MapUnit(GeographyUnit.DecimalDegree)
+                .CustomOverlays(overlay =>
+                    {
+                        overlay.WorldMapKitWmsWebOverlay();
+                    }
+                )
+                .MapTools(mapTools =>
+                    {
+                        mapTools.LoadingImageMapTool().Enabled(true).Width(64).Height(64)
+                            .ImageUri(new Uri(new Uri(Request.Url.AbsoluteUri), "../../Content/Images/loading.gif"));
+                    }
+                ).Render();
+        }
+    </div>
+</div>

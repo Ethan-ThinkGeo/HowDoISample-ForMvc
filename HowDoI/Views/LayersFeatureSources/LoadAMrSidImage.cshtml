@@ -1,0 +1,27 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            This sample simply adds a MrSid layer to show a satellite image on the map.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.StandardColors.White)))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-80.5, 68.9, 80, -60.43)
+          .StaticOverlay(overlay =>
+          {
+              MrSidRasterLayer sidImageLayer = new MrSidRasterLayer(Server.MapPath(@"~\App_Data\World.sid"));
+              sidImageLayer.UpperThreshold = double.MaxValue;
+              sidImageLayer.LowerThreshold = 0;
+
+              overlay.Layer(sidImageLayer);
+          }
+    ).Render();}
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@using ThinkGeo.MapSuite.MvcEdition
+@using ThinkGeo.MapSuite.Core
+<div class="four columns" id="navigation">
+    @{Html.RenderPartial("SourceCode");}
+    <div id="instrux-body">
+        <div id="instrux-text">
+            The sample shows how to add a popup on the map.
+        </div>
+    </div>
+</div>
+<div class="twelve columns" id="main">
+    <div>
+        @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+          .MapUnit(GeographyUnit.DecimalDegree)
+          .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
+          .CustomOverlays(overlay => overlay.WorldMapKitWmsWebOverlay())
+          .Popups(x =>
+              {
+                  PointShape position = new PointShape(-96.813120, 33.141263);
+                  System.Text.StringBuilder contentHtml = new System.Text.StringBuilder();
+
+                  contentHtml.Append("<div style='padding:10px; font-size:10px; font-family:verdana;'><img style='width:100px;height:124px;' alt='' align='left'")
+                      .Append("src='../../content/images/frisco.png'/>Frisco is an affluent city in Collin and Denton .")
+                      .Append("Counties in the U.S. state of Texas and a rapidly growing suburb of Dallas. As of the 2010 Census,")
+                      .Append(" 116,989 people were living in Frisco up from 33,714 in the previous census.")
+                      .Append("&nbsp;&nbsp;<a href='http://en.wikipedia.org/wiki/Frisco' ")
+                      .Append("target='_blank'><br/>more about Frisco TX...</a></div>");
+                  x.CloudPopup("samplePopup", position, contentHtml.ToString(), 380, 150).AutoSize(false).AutoPan(true).HasCloseButton(true);
+              })
+          .Render();}
+    </div>
+</div>
