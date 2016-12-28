@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ThinkGeo.MapSuite.Core;
+using ThinkGeo.MapSuite.Layers;
 
 namespace CSharp_HowDoISamples
 {

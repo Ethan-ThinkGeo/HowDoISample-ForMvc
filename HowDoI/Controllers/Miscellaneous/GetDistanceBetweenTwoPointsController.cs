@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {
@@ -15,7 +19,7 @@ namespace CSharp_HowDoISamples
             Map map = new Map("Map1",
                  new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage),
                  new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage));
-            map.MapBackground.BackgroundBrush = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
+            map.MapBackground = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
             map.CurrentExtent = new RectangleShape(-131.22, 55.05, -54.03, 16.91);
             map.MapUnit = GeographyUnit.DecimalDegree;
 

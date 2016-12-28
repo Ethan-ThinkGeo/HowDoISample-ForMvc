@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+﻿using System.Web.Mvc;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {

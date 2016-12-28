@@ -7,6 +7,7 @@ using ThinkGeo.MapSuite.Shapes;
 using ThinkGeo.MapSuite.Styles;
 using ThinkGeo.MapSuite.Mvc;
 using ZedGraph;
+using System.Web.Mvc;
 
 namespace CSharp_HowDoISamples_for_Debug
 {
@@ -40,7 +41,6 @@ namespace CSharp_HowDoISamples_for_Debug
                 citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(zedGraphStyle);
                 citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(TextStyles.City3("AREANAME"));
                 citiesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                citiesLayer.DrawingMarginPercentage = 100;
 
                 LayerOverlay staticOverlay = new LayerOverlay();
                 staticOverlay.Layers.Add("Cities", citiesLayer);
@@ -48,7 +48,7 @@ namespace CSharp_HowDoISamples_for_Debug
                 map.CustomOverlays.Add(staticOverlay);
                 currentMap = map;
             }
-            
+
             return View(map);
         }
 
@@ -79,7 +79,7 @@ namespace CSharp_HowDoISamples_for_Debug
 
             zedGraph.AxisChange();
 
-            e.Bitmap = zedGraph.GraphPane.GetImage();
+            e.GeoImage = new GeoImage(zedGraph.GraphPane.GetImage());
         }
 
         private void ChangeLabelPosition(ShapeFileFeatureLayer shapeFileLayer, int graphHeight)

@@ -2,8 +2,9 @@
 using System.Globalization;
 using System.Text;
 using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
 
 namespace CSharp_HowDoISamples_for_Debug
 {
@@ -54,7 +55,7 @@ namespace CSharp_HowDoISamples_for_Debug
             builder.AppendFormat(CultureInfo.InvariantCulture, "{0}|", GeoColor.ToWin32(geoColor).ToString());
             builder.AppendFormat(CultureInfo.InvariantCulture, "{0}|", string.Format("A:{0}  R:{1}  G:{2}  B:{3}", geoColor.AlphaComponent, geoColor.RedComponent, geoColor.GreenComponent, geoColor.BlueComponent));
 
-            map.MapBackground.BackgroundBrush = new GeoSolidBrush(geoColor);
+            map.MapBackground = new GeoSolidBrush(geoColor);
             map.StaticOverlay.ClientCache.CacheId = geoColorName;
 
             resultString = builder.ToString();

@@ -1,7 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {
@@ -29,7 +32,6 @@ namespace CSharp_HowDoISamples
                 majorCitiesLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("AREANAME", "Verdana", 8, DrawingFontStyles.Regular, GeoColor.StandardColors.Black);
                 majorCitiesLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.PointPlacement = PointPlacement.UpperCenter;
                 majorCitiesLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                majorCitiesLabelLayer.DrawingMarginPercentage = 80;
 
                 LayerOverlay overlay = new LayerOverlay("mapOverlay");
                 overlay.TileType = TileType.SingleTile;

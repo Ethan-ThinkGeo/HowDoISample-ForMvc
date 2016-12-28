@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {

@@ -9,7 +9,8 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Shapes;
 
 namespace CSharp_HowDoISamples
 {

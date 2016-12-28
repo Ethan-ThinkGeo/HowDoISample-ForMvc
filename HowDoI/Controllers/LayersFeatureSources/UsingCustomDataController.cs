@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {
@@ -15,7 +19,7 @@ namespace CSharp_HowDoISamples
             Map map = new Map("Map1",
                 new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage),
               new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage));
-            map.MapBackground.BackgroundBrush = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
+            map.MapBackground = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
             map.CurrentExtent = new RectangleShape(-125, 72, 50, -46);
             map.MapUnit = GeographyUnit.DecimalDegree;
 
@@ -26,7 +30,6 @@ namespace CSharp_HowDoISamples
             worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.SimpleColors.Transparent, GeoColor.FromArgb(100, GeoColor.SimpleColors.Green));
             worldLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("Test", "Arial", 10, DrawingFontStyles.Regular, GeoColor.StandardColors.Red, 0, -12);
             worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-            worldLayer.DrawingMarginPercentage = 50;
 
             worldLayer.FeatureSource.CustomColumnFetch += new EventHandler<CustomColumnFetchEventArgs>(FeatureSource_CustomColumnFetch);
             worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.RequiredColumnNames.Add("Test");

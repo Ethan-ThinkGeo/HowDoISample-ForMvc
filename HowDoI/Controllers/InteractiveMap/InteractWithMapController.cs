@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
-using System;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
 
 namespace CSharp_HowDoISamples
 {

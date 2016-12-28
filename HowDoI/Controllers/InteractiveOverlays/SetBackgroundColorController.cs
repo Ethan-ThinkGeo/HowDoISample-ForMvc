@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
 
 namespace CSharp_HowDoISamples
 {
@@ -15,7 +16,7 @@ namespace CSharp_HowDoISamples
         public void UpdateBackgound(Map map, GeoCollection<object> args)
         {
             GeoColor backcolor = GeoColor.FromHtml(args[0].ToString());
-            map.MapBackground.BackgroundBrush = new GeoSolidBrush(backcolor);
+            map.MapBackground = new GeoSolidBrush(backcolor);
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using PdfSharp;
+using PdfSharp.Pdf;
+using System.Collections.ObjectModel;
 using System.Web;
 using System.Web.Mvc;
-using PdfSharp;
-using PdfSharp.Pdf;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Layers;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
+using ThinkGeo.MapSuite.Styles;
 
 namespace CSharp_HowDoISamples
 {

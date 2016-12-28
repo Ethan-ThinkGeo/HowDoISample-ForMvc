@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite.Mvc;
 
 namespace CSharp_HowDoISamples_for_Debug
 {

@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
-using ThinkGeo.MapSuite.Core;
-using ThinkGeo.MapSuite.MvcEdition;
+using ThinkGeo.MapSuite;
+using ThinkGeo.MapSuite.Drawing;
+using ThinkGeo.MapSuite.Mvc;
+using ThinkGeo.MapSuite.Shapes;
 
 namespace CSharp_HowDoISamples
 {
@@ -15,7 +17,7 @@ namespace CSharp_HowDoISamples
             map.MapUnit = GeographyUnit.DecimalDegree;
             map.CurrentExtent = new RectangleShape(-125, 72, 50, -46);
 
-            map.MapBackground = new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF")));
+            map.MapBackground = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
             map.CustomOverlays.Add(new WorldMapKitWmsWebOverlay());
 
             return View(map);
