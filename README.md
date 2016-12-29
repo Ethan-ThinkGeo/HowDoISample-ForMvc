@@ -4,7 +4,7 @@
 
 The "How Do I?" samples collection is a comprehensive set containing a lot of interactive samples.
 
-![Screenshot](https://github.com/ThinkGeo/HowDoISamplesSample-ForMvc/blob/master/ScreenShot.png)
+![Screenshot](https://github.com/ThinkGeo/HowDoISample-ForMvc/blob/master/ScreenShot.png)
 
 ### Requirements
 
