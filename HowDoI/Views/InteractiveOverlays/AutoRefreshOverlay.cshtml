@@ -1,5 +1,9 @@
-﻿@using ThinkGeo.MapSuite.MvcEdition
-@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.Mvc
+@using ThinkGeo.MapSuite
+@using ThinkGeo.MapSuite.Drawing
+@using ThinkGeo.MapSuite.Layers
+@using ThinkGeo.MapSuite.Shapes
+@using ThinkGeo.MapSuite.Styles
 @using System.Configuration;
 <script language="javascript" type="text/javascript">
     function refreshMarkers() {
@@ -33,7 +37,7 @@
                     overlays.InMemoryMarkerOverlay("MarkerOverlay").AutoRefreshInterval(TimeSpan.FromMilliseconds(1000)).OnClientAutoRefreshTick("refreshMarkers")
                         .ZoomLevelSet(zoomlevelset =>
                         {
-                            zoomlevelset.ZoomLevel01.DefaultMarkerStyle.WebImage = new ThinkGeo.MapSuite.MvcEdition.WebImage(21, 25, -10.5f, -25f);
+                            zoomlevelset.ZoomLevel01.DefaultMarkerStyle.WebImage = new ThinkGeo.MapSuite.Mvc.WebImage(21, 25, -10.5f, -25f);
                             zoomlevelset.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
                         })
                         .Feature(new Feature(-95.26095, 38.93926))

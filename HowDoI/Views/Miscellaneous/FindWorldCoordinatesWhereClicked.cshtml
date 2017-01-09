@@ -1,6 +1,10 @@
-﻿@using ThinkGeo.MapSuite.MvcEdition
-@using ThinkGeo.MapSuite.Core
-@model ThinkGeo.MapSuite.MvcEdition.Map 
+@using ThinkGeo.MapSuite.Mvc
+@using ThinkGeo.MapSuite
+@using ThinkGeo.MapSuite.Drawing
+@using ThinkGeo.MapSuite.Layers
+@using ThinkGeo.MapSuite.Shapes
+@using ThinkGeo.MapSuite.Styles
+@model ThinkGeo.MapSuite.Mvc.Map 
 <script language="javascript" type="text/javascript">
     function mapClick(e) {
         document.getElementById("Label1").innerHTML = "The world coordinates where you clicked are <br/><span style='color:red;font-size:13;font-weight:bolder;'> (" + e.worldXY.lon + "," + e.worldXY.lat + ") </span>.";
