@@ -1,5 +1,9 @@
-﻿@using ThinkGeo.MapSuite.MvcEdition
-@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.Mvc
+@using ThinkGeo.MapSuite
+@using ThinkGeo.MapSuite.Drawing
+@using ThinkGeo.MapSuite.Layers
+@using ThinkGeo.MapSuite.Shapes
+@using ThinkGeo.MapSuite.Styles
 @using System.Configuration
 <script language="javascript" type="text/javascript">
     function showTextCheckBox_CheckedChanged(checkBoxObj) {
@@ -50,7 +54,7 @@
                         .ZoomLevelSet(z =>
                         {
                             z.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                            z.ZoomLevel01.DefaultMarkerStyle.WebImage = new ThinkGeo.MapSuite.MvcEdition.WebImage(Url.Content("~/Content/images/Vehicle.png"), 48, 48, -32, -32);
+                            z.ZoomLevel01.DefaultMarkerStyle.WebImage = new ThinkGeo.MapSuite.Mvc.WebImage(Url.Content("~/Content/images/Vehicle.png"), 48, 48, -32, -32);
                         });
                 })
                 .Render();

@@ -1,5 +1,9 @@
-﻿@using ThinkGeo.MapSuite.MvcEdition
-@using ThinkGeo.MapSuite.Core
+@using ThinkGeo.MapSuite.Mvc
+@using ThinkGeo.MapSuite
+@using ThinkGeo.MapSuite.Drawing
+@using ThinkGeo.MapSuite.Layers
+@using ThinkGeo.MapSuite.Shapes
+@using ThinkGeo.MapSuite.Styles
 <script language="javascript" type="text/javascript">
     var timer;
 
@@ -101,7 +105,7 @@
                       PointShape[] startPositions = TempData["InitPositions"] as PointShape[];
                       for (int i = 0; i < startPositions.Length; i++)
                       {
-                          ThinkGeo.MapSuite.MvcEdition.WebImage webImage = new ThinkGeo.MapSuite.MvcEdition.WebImage("../../Content/images/vehicle_van_" + (i + 1) + ".png");
+                          ThinkGeo.MapSuite.Mvc.WebImage webImage = new ThinkGeo.MapSuite.Mvc.WebImage("../../Content/images/vehicle_van_" + (i + 1) + ".png");
                           markers.Marker(startPositions[i].X, startPositions[i].Y, webImage).Id((i + 1).ToString());
                       }
                   });
