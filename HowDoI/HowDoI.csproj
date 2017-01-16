@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -28,6 +28,8 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,6 +161,14 @@
     </Reference>
     <Reference Include="ThinkGeo.MapSuite.Layers.Adornments, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Adornments.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Adornments.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Background, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Background.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Background.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Ecw, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Ecw.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Ecw.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ThinkGeo.MapSuite.Layers.Heat, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
@@ -849,6 +859,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ThinkGeo.MapSuite.10.0.0\build\net45\ThinkGeo.MapSuite.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.MapSuite.10.0.0\build\net45\ThinkGeo.MapSuite.targets'))" />
+    <Error Condition="!Exists('..\packages\MapSuiteDependency-HexagonGeospatialEcw.10.0.0\build\net45\MapSuiteDependency-HexagonGeospatialEcw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MapSuiteDependency-HexagonGeospatialEcw.10.0.0\build\net45\MapSuiteDependency-HexagonGeospatialEcw.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.MapSuite.Layers.Ecw.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Ecw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.MapSuite.Layers.Ecw.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Ecw.targets'))" />
   </Target>
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -880,4 +892,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\MapSuiteDependency-HexagonGeospatialEcw.10.0.0\build\net45\MapSuiteDependency-HexagonGeospatialEcw.targets" Condition="Exists('..\packages\MapSuiteDependency-HexagonGeospatialEcw.10.0.0\build\net45\MapSuiteDependency-HexagonGeospatialEcw.targets')" />
+  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.Ecw.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Ecw.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.Ecw.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Ecw.targets')" />
 </Project>
