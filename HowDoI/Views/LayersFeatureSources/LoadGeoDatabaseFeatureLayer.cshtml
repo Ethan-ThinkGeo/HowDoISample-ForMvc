@@ -36,7 +36,7 @@
 <div class="twelve columns" id="main">
     <div>
         @{Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
-          .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+          .MapBackground(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF")))
           .MapUnit(GeographyUnit.Meter)
           .CurrentExtent(2149408.38465815, 246471.365609125, 2204046.63635703, 213231.081162168)
           .StaticOverlay(overlay =>

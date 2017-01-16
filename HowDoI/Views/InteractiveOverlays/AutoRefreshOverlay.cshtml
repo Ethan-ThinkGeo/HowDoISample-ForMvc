@@ -27,7 +27,7 @@
     <div>
         @{
             Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
-                .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+                .MapBackground(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF")))
                 .CurrentExtent(-95.31105, 38.98184, -95.20359, 38.92185)
                 .MapUnit(GeographyUnit.DecimalDegree)
                 .CustomOverlays(overlays =>
