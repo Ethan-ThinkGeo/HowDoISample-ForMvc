@@ -191,6 +191,10 @@
       <HintPath>..\packages\ThinkGeo.MapSuite.ProductCenter.10.0.0\lib\net45\ThinkGeo.MapSuite.ProductCenter.exe</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Styles.Value, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Styles.Value.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.Value.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ThinkGeo.MapSuite.Styles.ZedGraph, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Styles.ZedGraph.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.ZedGraph.dll</HintPath>
       <Private>True</Private>
