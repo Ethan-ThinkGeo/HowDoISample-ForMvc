@@ -15,7 +15,8 @@
 <div class="twelve columns" id="main">
     <div id="map">
         @{
-            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510).MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromArgb(255, 233, 232, 214))))
+            Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
+                .MapBackground(new GeoSolidBrush(GeoColor.FromArgb(255, 233, 232, 214)))
                 .CurrentExtent(-97.766, 30.291, -97.755, 30.286)
                 .MapUnit(GeographyUnit.DecimalDegree)
                 .StaticOverlay(overlay =>

@@ -62,7 +62,7 @@
     @{
         Html.ThinkGeo().Map(Model).MapUnit(GeographyUnit.DecimalDegree)
             .CurrentExtent(-131.22, 55.05, -54.03, 16.91)
-            .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+            .MapBackground(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF")))
             .MapTools(tools => {
                 tools.LoadingImageMapTool().Enabled(true);
             })

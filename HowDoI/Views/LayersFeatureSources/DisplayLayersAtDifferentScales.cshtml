@@ -42,7 +42,7 @@
     <div>
         @{
             Html.ThinkGeo().Map("Map1", new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage), 510)
-              .MapBackground(new BackgroundLayer(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"))))
+              .MapBackground(new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF")))
               .MapUnit(GeographyUnit.DecimalDegree)
               .CurrentExtent(-195.7852, 91.2020, 0.2821, -30.6353)
               .MapTools(t => t.MouseMapTool().Enabled(false))
