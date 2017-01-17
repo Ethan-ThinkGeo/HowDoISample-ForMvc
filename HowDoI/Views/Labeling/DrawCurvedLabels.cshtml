@@ -23,14 +23,13 @@
                 {
                     ShapeFileFeatureLayer austinStreetsShapeLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/austinstreets.shp"));
                     austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(LineStyles.LocalRoad1);
+                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 9.2F, GeoColor.StandardColors.DarkGray, 12.2F, true));
 
                     ShapeFileFeatureLayer austinStreetsLabelLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/austinstreets.shp"));
                     austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
-                    TextStyle textStyle = TextStyles.LocalRoad1("FENAME");
+                    TextStyle textStyle = TextStyles.CreateSimpleTextStyle("FENAME", "Arial", 9, DrawingFontStyles.Regular, GeoColor.StandardColors.Black, 0, 0);
                     textStyle.SplineType = SplineType.StandardSplining;
-                    austinStreetsLabelLayer.DrawingMarginPercentage = 100;
                     austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(textStyle);
 
                     overlay.Layer("AustinStreetsShapeLayer", austinStreetsShapeLayer);

@@ -28,11 +28,10 @@
                 // Draw features based on values
                 ValueStyle valueStyle = new ValueStyle();
                 valueStyle.ColumnName = "POP_RANK";
-                valueStyle.ValueItems.Add(new ValueItem("1", PointStyles.Capital1));
-                valueStyle.ValueItems.Add(new ValueItem("2", PointStyles.Capital3));
-                valueStyle.ValueItems.Add(new ValueItem("3", PointStyles.City7));
+                valueStyle.ValueItems.Add(new ValueItem("1", PointStyles.CreateCompoundPointStyle(PointSymbolType.Square, GeoColor.StandardColors.White, GeoColor.StandardColors.Black, 1F, 10F, PointSymbolType.Square, GeoColor.StandardColors.Navy, GeoColor.StandardColors.Transparent, 0F, 6F)));
+                valueStyle.ValueItems.Add(new ValueItem("2", PointStyles.CreateCompoundPointStyle(PointSymbolType.Square, GeoColor.StandardColors.White, GeoColor.StandardColors.Black, 1F, 6F, PointSymbolType.Square, GeoColor.StandardColors.Maroon, GeoColor.StandardColors.Transparent, 0F, 2F)));
+                valueStyle.ValueItems.Add(new ValueItem("3", PointStyles.CreateSimpleCircleStyle(GeoColor.StandardColors.White, 3.2F, GeoColor.StandardColors.Black, 1F)));
                 citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(valueStyle);
-                citiesLayer.DrawingMarginPercentage = 50;
                 overlays.LayerOverlay().Layer("CitiesLayer", citiesLayer).IsBaseOverlay(false);
 
             })

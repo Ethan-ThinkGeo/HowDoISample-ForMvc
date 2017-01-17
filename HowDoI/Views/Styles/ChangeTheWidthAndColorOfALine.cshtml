@@ -53,9 +53,8 @@
                 {
 
                     ShapeFileFeatureLayer streetLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/austinstreets.shp"));
-                    streetLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.LocalRoad2;
+                    streetLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 8F, GeoColor.StandardColors.DarkGray, 10F, true);
                     streetLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    streetLayer.DrawingMarginPercentage = 10;
 
                     staticOverlay.Layer("Austin", streetLayer);
 

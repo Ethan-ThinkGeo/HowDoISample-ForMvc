@@ -45,7 +45,7 @@
 
             InMemoryFeatureLayer highlightLayer = new InMemoryFeatureLayer();
             highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(100, 60, 180, 60), GeoColor.GeographicColors.DeepOcean);
-            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Country1("CNTRY_NAME");
+            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = WorldStreetsTextStyles.GeneralPurpose("CNTRY_NAME",8);
             highlightLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             overlays.LayerOverlay("HighlightOverlay").IsBaseOverlay(false).TileType(TileType.SingleTile).Layer("HighlighLayer", highlightLayer);

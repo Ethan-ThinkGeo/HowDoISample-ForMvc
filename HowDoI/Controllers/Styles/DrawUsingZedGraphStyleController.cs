@@ -39,7 +39,7 @@ namespace CSharp_HowDoISamples_for_Debug
 
                 ShapeFileFeatureLayer citiesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cities_a.shp"));
                 citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(zedGraphStyle);
-                citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(TextStyles.City3("AREANAME"));
+                citiesLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(WorldStreetsTextStyles.GeneralPurpose("AREANAME",8));
                 citiesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                 LayerOverlay staticOverlay = new LayerOverlay();

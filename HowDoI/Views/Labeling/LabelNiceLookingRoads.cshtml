@@ -22,16 +22,16 @@
                 .StaticOverlay(overlay =>
                 {
                     ShapeFileFeatureLayer austinStreetsShapeLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\austinstreets.shp"));
-                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.LocalRoad1;
+                    austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 9.2F, GeoColor.StandardColors.DarkGray, 12.2F, true); 
                     austinStreetsShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    
+
                     overlay.Layer(austinStreetsShapeLayer);
                     overlay.TileType(TileType.MultipleTile);
                 })
                 .DynamicOverlay(overlay =>
                 {
                     ShapeFileFeatureLayer austinStreetsLabelLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\austinstreets.shp"));
-                    austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.LocalRoad1("FENAME");
+                    austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("FENAME", "Arial", 9, DrawingFontStyles.Regular, GeoColor.StandardColors.Black, 0, 0);
                     austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
                     austinStreetsLabelLayer.DrawingMarginPercentage = 100;
 

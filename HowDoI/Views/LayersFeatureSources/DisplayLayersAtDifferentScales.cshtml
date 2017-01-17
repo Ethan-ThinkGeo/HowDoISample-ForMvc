@@ -53,14 +53,13 @@
                   worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                   ShapeFileFeatureLayer citiesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cities_a.shp"));
-                  citiesLayer.ZoomLevelSet.ZoomLevel05.DefaultPointStyle = PointStyles.City3;
+                  citiesLayer.ZoomLevelSet.ZoomLevel05.DefaultPointStyle = PointStyles.CreateCompoundCircleStyle(GeoColor.StandardColors.White, 6F, GeoColor.StandardColors.Black, 1F, GeoColor.StandardColors.Black, 3F);
                   citiesLayer.ZoomLevelSet.ZoomLevel05.DefaultTextStyle = new TextStyle("AREANAME", new GeoFont("Verdana", 9), new GeoSolidBrush(GeoColor.StandardColors.Black));
                   citiesLayer.ZoomLevelSet.ZoomLevel05.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.StandardColors.White, 2);
                   citiesLayer.ZoomLevelSet.ZoomLevel05.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                  citiesLayer.DrawingMarginPercentage = 50;
 
                   ShapeFileFeatureLayer streetsLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/austinstreets.shp"));
-                  streetsLayer.ZoomLevelSet.ZoomLevel10.DefaultLineStyle = LineStyles.LocalRoad3;
+                  streetsLayer.ZoomLevelSet.ZoomLevel10.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 3F, GeoColor.StandardColors.DarkGray, 5F, true);
                   streetsLayer.ZoomLevelSet.ZoomLevel10.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                   overlay.Layer(worldLayer);

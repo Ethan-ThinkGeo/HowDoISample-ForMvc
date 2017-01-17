@@ -20,7 +20,7 @@ namespace CSharp_HowDoISamples
             map1.CustomOverlays.Add(worldMapKitOverlay);
 
             ShapeFileFeatureLayer usStatesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/STATES.SHP"));
-            usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.State2;
+            usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.Transparent, GeoColor.FromArgb(255, 156, 155, 154), 1);
             usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.StartCap = DrawingLineCap.Round;
             usStatesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 

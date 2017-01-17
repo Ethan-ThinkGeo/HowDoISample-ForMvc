@@ -37,8 +37,8 @@ namespace CSharp_HowDoISamples
             map.CustomOverlays.Add(staticOverlay);
 
             InMemoryFeatureLayer highlightLayer = new InMemoryFeatureLayer();
-            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.Capital2;
-            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Evergreen1;
+            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateCompoundPointStyle(PointSymbolType.Square, GeoColor.StandardColors.White, GeoColor.StandardColors.Black, 1F, 8F, PointSymbolType.Square, GeoColor.StandardColors.Navy, GeoColor.StandardColors.Transparent, 0F, 4F);
+            highlightLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(150, 154, 205, 50));
             highlightLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
             LayerOverlay dynamicOverlay = new LayerOverlay("DynamicOverlay");

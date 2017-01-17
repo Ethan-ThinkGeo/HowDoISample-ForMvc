@@ -22,10 +22,9 @@
                 .StaticOverlay(overlay =>
                 {
                     ShapeFileFeatureLayer utahWaterShapeLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/UtahWater.shp"));
-                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Water1;
-                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Water1("Landname");
+                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = WorldStreetsAreaStyles.Water();
+                    utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = WorldStreetsTextStyles.Water("Landname",6);
                     utahWaterShapeLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    utahWaterShapeLayer.DrawingMarginPercentage = 50;
 
                     overlay.Layer(utahWaterShapeLayer);
                 })

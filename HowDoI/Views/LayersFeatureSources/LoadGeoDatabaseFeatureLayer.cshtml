@@ -42,7 +42,7 @@
           .StaticOverlay(overlay =>
           {
               PersonalGeoDatabaseFeatureLayer worldLayer = new PersonalGeoDatabaseFeatureLayer(Server.MapPath("~/App_Data/JORWD6gdb.mdb"), null, null, "Mains");
-              worldLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.LocalRoad2;
+              worldLayer.ZoomLevelSet.ZoomLevel01.DefaultLineStyle = LineStyles.CreateSimpleLineStyle(GeoColor.StandardColors.White, 8F, GeoColor.StandardColors.DarkGray, 10F, true);
               worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
               overlay.Layer("WorldLayer", worldLayer);

@@ -113,23 +113,22 @@
                     EcwRasterLayer worldImageLayer = new EcwRasterLayer(Server.MapPath("~/App_Data/World.ecw"));
 
                     ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
-                    worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
+                    worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));
                     worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.StartCap = DrawingLineCap.Round;
                     worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.EndCap = DrawingLineCap.Round;
                     worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                     ShapeFileFeatureLayer usStatesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/STATES.SHP"));
-                    usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.State2;
+                    usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.Transparent, GeoColor.FromArgb(255, 156, 155, 154), 1);
                     usStatesLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle.OutlinePen.StartCap = DrawingLineCap.Round;
                     usStatesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                     ShapeFileFeatureLayer worldCapitalsLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/capital.shp"));
-                    worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.City4;
-                    worldCapitalsLayer.DrawingMarginPercentage = 80;
+                    worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = PointStyles.CreateSimpleCircleStyle(GeoColor.StandardColors.White, 6F, GeoColor.StandardColors.Black, 1F);
                     worldCapitalsLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
                     ShapeFileFeatureLayer worldCapitalsLabelsLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/capital.shp"));
-                    worldCapitalsLabelsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.Capital1("city_name");
+                    worldCapitalsLabelsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("city_name", "Arial", 13, DrawingFontStyles.Bold, GeoColor.StandardColors.Maroon, 0, -8);
                     worldCapitalsLabelsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.HaloPen = new GeoPen(GeoColor.StandardColors.White, 2);
                     worldCapitalsLabelsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.HaloPen.StartCap = DrawingLineCap.Round;
                     worldCapitalsLabelsLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle.HaloPen.EndCap = DrawingLineCap.Round;

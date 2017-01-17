@@ -30,7 +30,7 @@ height="98%" src="@Url.Content("~/Content/images/MapView.jpg")" />
           {
               string connectString = "User ID=userid;Password=password;Data Source=192.168.0.178/orcl;";
               OracleFeatureLayer oracleLayer = new OracleFeatureLayer(connectString, "states", "recid");
-              oracleLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
+              oracleLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));
               oracleLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
               overlay.Layer(oracleLayer);

@@ -30,7 +30,7 @@ height="98%" src="@Url.Content("~/Content/images/MapView.jpg")" />
           {
               string connectString = "User ID=userid;Password=password;Data Source=192.168.0.178/orcl;";
               MsSql2008FeatureLayer sql2008Layer = new MsSql2008FeatureLayer(connectString, "states", "recid");
-              sql2008Layer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country1;
+              sql2008Layer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69));
               sql2008Layer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
               overlay.Layer("Sql2008Layer", sql2008Layer);

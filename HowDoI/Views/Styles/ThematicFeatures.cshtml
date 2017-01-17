@@ -34,14 +34,14 @@
                 .StaticOverlay(staticOverlay =>
                 {
                     ClassBreakStyle classBreakStyle = new ClassBreakStyle("POP_CNTRY");
-                    classBreakStyle.ClassBreaks.Add(new ClassBreak(double.MinValue, AreaStyles.Grass1));
-                    classBreakStyle.ClassBreaks.Add(new ClassBreak(1000000, AreaStyles.Evergreen2));
-                    classBreakStyle.ClassBreaks.Add(new ClassBreak(10000000, AreaStyles.Evergreen1));
-                    classBreakStyle.ClassBreaks.Add(new ClassBreak(50000000, AreaStyles.Crop1));
-                    classBreakStyle.ClassBreaks.Add(new ClassBreak(100000000, AreaStyles.Forest1));
+                    classBreakStyle.ClassBreaks.Add(new ClassBreak(double.MinValue, WorldStreetsAreaStyles.Grass()));
+                    classBreakStyle.ClassBreaks.Add(new ClassBreak(1000000, AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(150, 144, 238, 144))));
+                    classBreakStyle.ClassBreaks.Add(new ClassBreak(10000000, AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(150, 154, 205, 50))));
+                    classBreakStyle.ClassBreaks.Add(new ClassBreak(50000000, AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.LightGreen)));
+                    classBreakStyle.ClassBreaks.Add(new ClassBreak(100000000, AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.DarkGreen)));
 
                     ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
-                    worldLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(AreaStyles.Country1);
+                    worldLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 233, 232, 214), GeoColor.FromArgb(255, 118, 138, 69)));
                     worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
                     worldLayer.ZoomLevelSet.ZoomLevel01.CustomStyles.Add(classBreakStyle);
                     staticOverlay.IsBaseOverlay(false).Layer("WorldLayer", worldLayer);

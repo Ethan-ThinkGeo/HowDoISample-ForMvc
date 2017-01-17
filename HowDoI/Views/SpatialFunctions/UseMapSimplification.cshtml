@@ -66,7 +66,7 @@
 
                     InMemoryFeatureLayer simplificationLayer = new InMemoryFeatureLayer();
                     simplificationLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    simplificationLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.Country2;
+                    simplificationLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.StandardColors.Transparent, GeoColor.FromArgb(255, 156, 155, 154), 1);
                     simplificationLayer.InternalFeatures.Add(feature);
                     staticOverlay.IsBaseOverlay(false).Layer("SimplificationLayer", simplificationLayer);
                 })
