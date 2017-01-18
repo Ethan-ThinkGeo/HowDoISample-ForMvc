@@ -84,7 +84,7 @@
                     overlays.BingMapsOverlay("Bing Map").MapType(BingMapsStyle.Road);
                     // Custom ShapeFile
                     ShapeFileFeatureLayer worldLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cntry02.shp"));
-                    worldLayer.ZoomLevelSet = new GoogleMapsZoomLevelSet();
+                    worldLayer.ZoomLevelSet = new ZoomLevelSet();
                     worldLayer.ZoomLevelSet.ZoomLevel01.DefaultAreaStyle = AreaStyles.CreateSimpleAreaStyle(GeoColor.FromArgb(255, 243, 239, 228), GeoColor.FromArgb(255, 218, 193, 163), 1);
                     worldLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
 
