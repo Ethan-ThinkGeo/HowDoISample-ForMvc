@@ -195,7 +195,7 @@
       <HintPath>..\packages\ThinkGeo.MapSuite.Styles.Value.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.Value.dll</HintPath>
       <Private>True</Private>
     </Reference>
-	<Reference Include="ThinkGeo.MapSuite.Styles.WorldStreets, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+    <Reference Include="ThinkGeo.MapSuite.Styles.WorldStreets, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Styles.WorldStreets.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.WorldStreets.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -218,7 +218,6 @@
     <Compile Include="Controllers\BackgroundMaps\UseGoogleMapController.cs" />
     <Compile Include="Controllers\BackgroundMaps\UseMicrosoftMapsLayerController.cs" />
     <Compile Include="Controllers\BackgroundMaps\UseOpenStreetMapController.cs" />
-    <Compile Include="Controllers\BackgroundMaps\UseYahooMapController.cs" />
     <Compile Include="Controllers\InteractiveMap\AddAClickEventController.cs" />
     <Compile Include="Controllers\InteractiveMap\ChangeCursorStyleController.cs" />
     <Compile Include="Controllers\InteractiveMap\InteractWithMapController.cs" />
@@ -769,7 +768,6 @@
     <Content Include="Views\BackgroundMaps\UseBingMaps.cshtml" />
     <Content Include="Views\BackgroundMaps\UseGoogleMap.cshtml" />
     <Content Include="Views\BackgroundMaps\UseOpenStreetMap.cshtml" />
-    <Content Include="Views\BackgroundMaps\UseYahooMap.cshtml" />
     <Content Include="Views\LayersFeatureSources\UsingCustomData.cshtml" />
     <Content Include="Views\LayersFeatureSources\DisplayLayersAtDifferentScales.cshtml" />
     <Content Include="Views\LayersFeatureSources\StopCertainFeaturesFromDrawing.cshtml" />

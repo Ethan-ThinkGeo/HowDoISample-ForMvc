@@ -17,11 +17,6 @@
             appendButton(container, "Satellite", google.maps.MapTypeId.SATELLITE);
             appendButton(container, "Physical", google.maps.MapTypeId.TERRAIN);
         }
-        else if (newLayer == "Yahoo Map") {
-            appendButton(container, "Satellite", YAHOO_MAP_SAT);
-            appendButton(container, "Regular", YAHOO_MAP_REG);
-            appendButton(container, "Hybrid", YAHOO_MAP_HYB);
-        }
         else if (newLayer == "Bing Map") {
             appendButton(container, "Road", VEMapStyle.Road);
             appendButton(container, "Aerial", VEMapStyle.Aerial);
@@ -85,8 +80,6 @@
                     overlays.GoogleOverlay("Google Map").GoogleMapType(GoogleMapType.Normal);
                     //OpenStreet Map
                     overlays.OpenStreetMapOverlay("Open Street Map");
-                    //Yahoo Map
-                    overlays.YahooOverlay("Yahoo Map").YahooMapType(YahooMapType.Regular).JavaScriptLibraryUri(new Uri(ConfigurationManager.AppSettings["YahooUri"]));
                     // Bing Map
                     overlays.BingMapsOverlay("Bing Map").MapType(BingMapsStyle.Road);
                     // Custom ShapeFile

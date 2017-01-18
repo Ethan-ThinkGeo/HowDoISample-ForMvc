@@ -10,20 +10,11 @@
     <Sample Id="DisplayASimpleMap" Name="Display a Simple Map" VideoUrl="http://www.youtube.com/watch%3Fv=l73gMNmk3kc" >
       <Description>This sample simply shows how to load a ThinkGeo default world map.</Description>
     </Sample>
-    <Sample Id="BackgroundMap" Name="Use Google/Yahoo/WMS etc." VideoUrl="http://www.youtube.com/watch%3Fv=pF_2Ulp-xoA">
-      <Description>
-        This sample demonstrates how to load the WmsOverlay, OpenStreetMap, Google Map, Yahoo Map,
-        Bing Map and ThinkGeo World Map Kit as the base map.
-      </Description>
-    </Sample>
     <Sample Id="UseGoogleMap" Name="Use Google Map" VideoUrl="http://www.youtube.com/watch%3Fv=rUPf__BgGxM" >
       <Description>This sample shows how to load a map from Google and switch between different map types (road, satellite, hybrid, etc.).</Description>
     </Sample>
     <Sample Id="UseBingMaps" Name="Use Bing Map" VideoUrl="http://www.youtube.com/watch%3Fv=vnkKsGJSNbY" >
       <Description>This sample shows how to load a map from Bing's REST service and switch between different map types (road, aerial, hybrid, etc.).</Description>
-    </Sample>
-    <Sample Id="UseYahooMap" Name="Use Yahoo Map" VideoUrl="http://www.youtube.com/watch%3Fv=mUBSUjXQkuo" >
-      <Description>This sample shows how to load a map from Yahoo and switch between different map types (regular, satellite, hybrid, etc.).</Description>
     </Sample>
     <Sample Id="LoadAnArcGISServerRestOverlay" Name="Load An ArcGISServerRestOverlay" VideoUrl="http://www.youtube.com/watch%3Fv=ZElBHAhbTgA">
       <Description>
