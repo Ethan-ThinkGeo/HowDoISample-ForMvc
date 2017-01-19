@@ -62,7 +62,6 @@
                     ShapeFileFeatureLayer majorCitiesLabelLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\cities_a.shp"));
                     majorCitiesLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("AREANAME", "Verdana", 8, DrawingFontStyles.Regular, GeoColor.StandardColors.Black);
                     majorCitiesLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    majorCitiesLabelLayer.DrawingMarginPercentage = 80;
 
                     overlay.Layer("MajorCitiesLabels", majorCitiesLabelLayer);
                 })

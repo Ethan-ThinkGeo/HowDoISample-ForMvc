@@ -28,7 +28,6 @@
                 ShapeFileFeatureLayer citiesLayer = new ShapeFileFeatureLayer(Server.MapPath("~/App_Data/cities_a.shp"));
                 citiesLayer.ZoomLevelSet.ZoomLevel01.DefaultPointStyle = new PointStyle(PointSymbolType.Star, new GeoSolidBrush(GeoColor.StandardColors.Green), new GeoPen(GeoColor.StandardColors.Red, 5), 20);
                 citiesLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                citiesLayer.DrawingMarginPercentage = 100;
 
                 overlays.LayerOverlay().Layer("CitiesLayer", citiesLayer).IsBaseOverlay(false);
 

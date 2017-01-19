@@ -33,8 +33,6 @@
                     ShapeFileFeatureLayer austinStreetsLabelLayer = new ShapeFileFeatureLayer(Server.MapPath(@"~\App_Data\austinstreets.shp"));
                     austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.DefaultTextStyle = TextStyles.CreateSimpleTextStyle("FENAME", "Arial", 9, DrawingFontStyles.Regular, GeoColor.StandardColors.Black, 0, 0);
                     austinStreetsLabelLayer.ZoomLevelSet.ZoomLevel01.ApplyUntilZoomLevel = ApplyUntilZoomLevel.Level20;
-                    austinStreetsLabelLayer.DrawingMarginPercentage = 100;
-
                     overlay.TileType(TileType.SingleTile);
                     overlay.Layer(austinStreetsLabelLayer);
                 })
