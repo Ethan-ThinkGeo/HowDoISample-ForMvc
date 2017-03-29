@@ -4,7 +4,7 @@
 
 The "How Do I?" samples collection is a comprehensive set containing a lot of interactive samples.
 
-Please refer to [Wiki](System.String[]) for the details.
+Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_web_for_mvc) for the details.
 
 ![Screenshot](https://github.com/ThinkGeo/HowDoISample-ForMvc/blob/master/ScreenShot.png)
 
