@@ -4,6 +4,8 @@
 
 The "How Do I?" samples collection is a comprehensive set containing a lot of interactive samples.
 
+Please refer to [Wiki](http://wiki.thinkgeo.com/wiki/map_suite_desktop_for_wpf) for the details.
+
 ![Screenshot](https://github.com/ThinkGeo/HowDoISample-ForMvc/blob/master/ScreenShot.png)
 
 ### Requirements
@@ -18,9 +20,9 @@ Working...
 
 ### Getting Help
 
-[Map Suite Mvc Wiki Resources](http://wiki.thinkgeo.com/wiki/map_suite_mvc_edition)
+[Map Suite Mvc Wiki Resources](http://wiki.thinkgeo.com/wiki/map_suite_web_for_mvc)
 
-[Map Suite Mvc Product Description](http://thinkgeo.com/map-suite-developer-gis/mvc-edition/)
+[Map Suite Mvc Product Description](https://thinkgeo.com/ui-controls#web-platforms)
 
 [ThinkGeo Community Site](http://community.thinkgeo.com/)
 
