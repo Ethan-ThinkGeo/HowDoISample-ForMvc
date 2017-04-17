@@ -1,4 +1,4 @@
-# How Do I Sample for Mvc
+# How Do I Sample
 
 ### Description
 
