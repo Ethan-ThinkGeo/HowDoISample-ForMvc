@@ -20,7 +20,7 @@
           .CurrentExtent(-80.5, 68.9, 80, -60.43)
           .StaticOverlay(overlay =>
           {
-              GdiPlusRasterLayer gdiPlusImageLayer = new GdiPlusRasterLayer(Server.MapPath(@"~\App_Data\World.tif"));
+              NativeImageRasterLayer gdiPlusImageLayer = new NativeImageRasterLayer(Server.MapPath(@"~\App_Data\World.tif"));
               gdiPlusImageLayer.UpperThreshold = double.MaxValue;
               gdiPlusImageLayer.LowerThreshold = 0;
 

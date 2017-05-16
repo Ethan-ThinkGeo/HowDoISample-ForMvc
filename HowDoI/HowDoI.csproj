@@ -179,8 +179,16 @@
       <HintPath>..\packages\ThinkGeo.MapSuite.Layers.FdoVector.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.FdoVector.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Grids, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Grids.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Grids.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ThinkGeo.MapSuite.Layers.Heat, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Heat.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Heat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.NativeImage, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.NativeImage.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.NativeImage.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ThinkGeo.MapSuite.Layers.PersonalGeoDatabase, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
@@ -191,8 +199,16 @@
       <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Restriction.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Restriction.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Sdf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Sdf.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Sdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ThinkGeo.MapSuite.Layers.ShapeFile, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Layers.ShapeFile.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.ShapeFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Layers.Tab, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Layers.Tab.10.0.0\lib\net45\ThinkGeo.MapSuite.Layers.Tab.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ThinkGeo.MapSuite.Mvc, Version=10.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -207,8 +223,16 @@
       <HintPath>..\packages\ThinkGeo.MapSuite.Styles.ClassBreak.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.ClassBreak.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Styles.DotDensity, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Styles.DotDensity.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.DotDensity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ThinkGeo.MapSuite.Styles.FleeBoolean, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
       <HintPath>..\packages\ThinkGeo.MapSuite.Styles.FleeBoolean.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.FleeBoolean.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThinkGeo.MapSuite.Styles.Regex, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThinkGeo.MapSuite.Styles.Regex.10.0.0\lib\net45\ThinkGeo.MapSuite.Styles.Regex.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ThinkGeo.MapSuite.Styles.Value, Version=10.0.0.0, Culture=neutral, PublicKeyToken=0828af5241fb4207, processorArchitecture=MSIL">
@@ -891,6 +915,7 @@
     <Error Condition="!Exists('..\packages\MapSuiteDependency-Fdo.10.0.0\build\net45\MapSuiteDependency-Fdo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MapSuiteDependency-Fdo.10.0.0\build\net45\MapSuiteDependency-Fdo.targets'))" />
     <Error Condition="!Exists('..\packages\ThinkGeo.MapSuite.Layers.FdoVector.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.FdoVector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.MapSuite.Layers.FdoVector.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.FdoVector.targets'))" />
     <Error Condition="!Exists('..\packages\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.targets'))" />
+    <Error Condition="!Exists('..\packages\ThinkGeo.MapSuite.Layers.Sdf.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Sdf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ThinkGeo.MapSuite.Layers.Sdf.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Sdf.targets'))" />
   </Target>
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -928,4 +953,5 @@
   <Import Project="..\packages\MapSuiteDependency-Fdo.10.0.0\build\net45\MapSuiteDependency-Fdo.targets" Condition="Exists('..\packages\MapSuiteDependency-Fdo.10.0.0\build\net45\MapSuiteDependency-Fdo.targets')" />
   <Import Project="..\packages\ThinkGeo.MapSuite.Layers.FdoVector.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.FdoVector.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.FdoVector.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.FdoVector.targets')" />
   <Import Project="..\packages\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.PersonalGeoDatabase.targets')" />
+  <Import Project="..\packages\ThinkGeo.MapSuite.Layers.Sdf.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Sdf.targets" Condition="Exists('..\packages\ThinkGeo.MapSuite.Layers.Sdf.10.0.0\build\net45\ThinkGeo.MapSuite.Layers.Sdf.targets')" />
 </Project>
