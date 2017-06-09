@@ -16,7 +16,24 @@ This sample makes use of the following NuGet Packages
 
 ### About the Code
 
-Working...
+```csharp
+
+ public ActionResult DisplayASimpleMap()
+        {
+            Map map = new Map("Map1",
+                new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage),
+                new System.Web.UI.WebControls.Unit(100, System.Web.UI.WebControls.UnitType.Percentage));
+
+            map.MapUnit = GeographyUnit.DecimalDegree;
+            map.CurrentExtent = new RectangleShape(-125, 72, 50, -46);
+
+            map.MapBackground = new GeoSolidBrush(GeoColor.FromHtml("#E5E3DF"));
+            map.CustomOverlays.Add(new WorldMapKitWmsWebOverlay());
+
+            return View(map);
+
+
+```
 
 ### Getting Help
 
@@ -32,7 +49,9 @@ Working...
 
 This example makes use of the following APIs:
 
-Working...
+- [ThinkGeo.MapSuite.Mvc.WorldMapKitWmsWebOverlay](http://wiki.thinkgeo.com/wiki/api/thinkgeo.mapsuite.mvc.worldmapkitwmsweboverlay)
+- [ThinkGeo.MapSuite.Drawing.GeoSolidBrush](http://wiki.thinkgeo.com/wiki/api/thinkgeo.mapsuite.drawing.geosolidbrush)
+- [ThinkGeo.MapSuite.Shapes.RectangleShape](http://wiki.thinkgeo.com/wiki/api/thinkgeo.mapsuite.shapes.rectangleshape)
 
 ### About Map Suite
 
